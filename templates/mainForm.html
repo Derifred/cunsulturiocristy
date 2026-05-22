@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Panel Principal | Consultorio Dental Cristy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eef5f7;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3b44 0%, #1b5e6b 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text h1 i {
+            color: #ffd966;
+            margin-right: 8px;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.15);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+        }
+
+        .user-area i {
+            font-size: 1.2rem;
+        }
+
+        .logout-btn {
+            background: #bc4742;
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #a13e3a;
+            transform: scale(1.02);
+        }
+
+        .main-layout {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #dce8ec;
+            padding: 1.5rem 0;
+            overflow-y: auto;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 1.8rem;
+            color: #2c5a66;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .menu-item i {
+            width: 24px;
+            font-size: 1.2rem;
+            color: #4186a3;
+        }
+
+        .menu-item:hover {
+            background: #eef5f7;
+            border-left-color: #2c9c7c;
+        }
+
+        .menu-item.active {
+            background: #eef5f7;
+            border-left-color: #2c9c7c;
+            color: #1e3b44;
+            font-weight: 600;
+        }
+
+        .work-panel {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .panel-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3b44;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid #2c9c7c;
+            display: inline-block;
+        }
+
+        .input-field {
+            margin-bottom: 1.2rem;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2c7da0;
+            margin-bottom: 0.3rem;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #dce8ec;
+            transition: all 0.2s;
+            padding: 0.2rem 0.2rem 0.2rem 1rem;
+        }
+
+        .input-box i {
+            color: #2c7da0;
+            width: 28px;
+        }
+
+        .input-box input, .input-box select, .input-box textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            background: transparent;
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-box textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .input-box:focus-within {
+            border-color: #2c9c7c;
+            box-shadow: 0 0 0 2px rgba(44,156,124,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #236b88, #1c8464);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+        }
+
+        .info-message {
+            background: #eef5f7;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            color: #2c5a66;
+        }
+
+        .citas-container {
+            margin-top: 1rem;
+            border: 1px solid #e0ecef;
+            border-radius: 12px;
+            padding: 1rem;
+            background: #fafefe;
+        }
+
+        .cita-item {
+            background: white;
+            border-radius: 10px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #2c9c7c;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .cita-item.agendada {
+            border-left-color: #f4a261;
+        }
+
+        .cita-item.historial {
+            border-left-color: #95a5a6;
+            opacity: 0.9;
+        }
+
+        .cita-fecha, .cita-hora, .cita-motivo {
+            font-size: 0.85rem;
+            margin: 3px 0;
+        }
+
+        .cita-estado {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .estado-agendada { background: #fff3cd; color: #856404; }
+        .estado-confirmada { background: #d4edda; color: #155724; }
+        .estado-cancelada { background: #f8d7da; color: #721c24; }
+        .estado-completada { background: #d1ecf1; color: #0c5460; }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1e3b44;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .piezas-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .pieza-item {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 8px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.7rem;
+        }
+
+        .pieza-item:hover {
+            background: #e9ecef;
+            transform: scale(1.02);
+        }
+
+        .pieza-item.selected {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .pieza-codigo {
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .pieza-nombre {
+            font-size: 0.6rem;
+            color: #666;
+        }
+
+        .pieza-item.selected .pieza-nombre {
+            color: white;
+        }
+
+        .selected-piezas {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 80px; }
+            .menu-item span:not(.menu-icon) { display: none; }
+            .menu-item { justify-content: center; padding: 1rem; }
+            .menu-item i { margin: 0; }
+            .logo-img { width: 40px; height: 40px; }
+            .logo-text h1 { font-size: 1.2rem; }
+            .logo-text p { font-size: 0.7rem; }
+            .piezas-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-area">
+            <img src="/static/imagenes/logo.png" alt="Logo Consultorio Dental Dra. Cristy" class="logo-img" onerror="this.src='https://via.placeholder.com/50?text=Logo'">
+            <div class="logo-text">
+                <h1><i class="fas fa-tooth"></i> Consultorio Dental Dra. Cristy</h1>
+                <p>Pacientes · Citas · Consultas · Odontograma</p>
+            </div>
+        </div>
+        <div class="user-area">
+            <i class="fas fa-user-circle"></i>
+            <span id="userNameDisplay">Cargando...</span>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="sidebar" id="sidebar">
+            <div class="menu-item" data-action="buscar">
+                <i class="fas fa-search"></i> <span>Buscar paciente</span>
+            </div>
+            <div class="menu-item" data-action="registrar">
+                <i class="fas fa-user-plus"></i> <span>Registrar paciente</span>
+            </div>
+            <div class="menu-item" data-action="agendar">
+                <i class="fas fa-calendar-plus"></i> <span>Agendar cita</span>
+            </div>
+            <div class="menu-item" data-action="citasdia">
+                <i class="fas fa-calendar-day"></i> <span>Citas del día</span>
+            </div>
+            <div class="menu-item" data-action="historial">
+                <i class="fas fa-notes-medical"></i> <span>Historial clínico</span>
+            </div>
+            <div class="menu-item" data-action="usuarios">
+                <i class="fas fa-users"></i> <span>Usuarios</span>
+            </div>
+            <div class="menu-item" data-action="bitacora">
+                <i class="fas fa-history"></i> <span>Bitácora</span>
+            </div>
+        </div>
+
+        <div class="work-panel" id="workPanel">
+            <div class="panel-card">
+                <div class="panel-title" id="panelTitle">Bienvenido</div>
+                <div id="panelContent">
+                    <div class="info-message">
+                        <i class="fas fa-info-circle"></i> Seleccione una opción del menú lateral para comenzar.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VERIFICAR AUTENTICACION
+        (function checkAuth() {
+            const session = localStorage.getItem('userSession');
+            if (!session) {
+                window.location.href = '/';
+                return;
+            }
+            try {
+                const data = JSON.parse(session);
+                if (!data.loggedIn && !data.username) {
+                    window.location.href = '/';
+                    return;
+                }
+                // Mostrar nombre del usuario
+                document.getElementById('userNameDisplay').innerText = data.nombre || data.username || 'Usuario';
+            } catch(e) {
+                window.location.href = '/';
+            }
+        })();
+
+        // LOGOUT
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('userSession');
+            window.location.href = '/';
+        });
+
+        const workPanel = document.getElementById('workPanel');
+        let panelTitle = document.getElementById('panelTitle');
+        let panelContent = document.getElementById('panelContent');
+
+        function showToast(message, isError) {
+            const toast = document.createElement('div');
+            toast.className = 'toast-message';
+            toast.style.background = isError ? '#bc4742' : '#1e3b44';
+            toast.innerHTML = '<i class="fas ' + (isError ? 'fa-exclamation-triangle' : 'fa-info-circle') + '"></i> ' + message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function showPanel(title, contentHtml) {
+            panelTitle.innerHTML = title;
+            panelContent.innerHTML = contentHtml;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function cargarPiezasDentales() {
+            try {
+                const response = await fetch('/api/piezas-dentales');
+                const result = await response.json();
+                if (result.success) {
+                    return result.data;
+                }
+                return [];
+            } catch (error) {
+                console.error('Error cargando piezas:', error);
+                return [];
+            }
+        }
+
+        window.togglePiezaSeleccionada = function(element) {
+            element.classList.toggle('selected');
+            actualizarListaPiezasSeleccionadas();
+        }
+
+        function actualizarListaPiezasSeleccionadas() {
+            const selected = document.querySelectorAll('#piezasGrid .pieza-item.selected');
+            const container = document.getElementById('selectedPiezasList');
+            if (!container) return;
+
+            if (selected.length === 0) {
+                container.innerHTML = '<span style="color:#666;">No hay piezas seleccionadas</span>';
+                return;
+            }
+
+            let html = '<strong>Piezas seleccionadas:</strong><br>';
+            for (const item of selected) {
+                const codigo = item.dataset.codigo;
+                const nombre = item.dataset.nombre;
+                html += `<span style="display:inline-block;background:#28a745;color:white;padding:2px 8px;border-radius:15px;margin:3px;font-size:0.75rem;">${codigo} - ${nombre.substring(0, 20)}</span>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function abrirModalConsultaCita(citaId, pacienteId, pacienteCedula, pacienteNombre) {
+            let modal = document.getElementById('modalConsultaCita');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'modalConsultaCita';
+                modal.style.cssText = `display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:2000;overflow-y:auto;`;
+                document.body.appendChild(modal);
+            }
+
+            cargarPiezasDentales().then(piezas => {
+                let piezasHtml = '<div class="piezas-grid" id="piezasGrid">';
+                for (const p of piezas) {
+                    piezasHtml += `
+                        <div class="pieza-item" data-id="${p.id}" data-codigo="${p.codigo}" data-nombre="${p.nombre}" onclick="togglePiezaSeleccionada(this)">
+                            <div class="pieza-codigo">${p.codigo}</div>
+                            <div class="pieza-nombre">${p.nombre.substring(0, 15)}</div>
+                        </div>
+                    `;
+                }
+                piezasHtml += '</div><div id="selectedPiezasList" class="selected-piezas"></div>';
+
+                modal.innerHTML = `
+                    <div style="background:white;border-radius:20px;max-width:700px;width:90%;padding:30px;max-height:90vh;overflow-y:auto;">
+                        <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+                            <h2><i class="fas fa-stethoscope"></i> Registrar consulta</h2>
+                            <button onclick="document.getElementById('modalConsultaCita').style.display='none'" style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button>
+                        </div>
+                        <div class="info-message" style="margin-bottom:15px;">
+                            <strong>Paciente:</strong> ${escapeHtml(pacienteNombre)}<br>
+                            <strong>Cédula:</strong> ${pacienteCedula}
+                        </div>
+                        <input type="hidden" id="consultaCitaId" value="${citaId}">
+                        <input type="hidden" id="consultaPacienteId" value="${pacienteId}">
+                        <input type="hidden" id="consultaPacienteCedula" value="${pacienteCedula}">
+
+                        <div class="input-field">
+                            <label class="input-label">Motivo de la consulta</label>
+                            <div class="input-box"><i class="fas fa-stethoscope"></i><input type="text" id="consultaMotivo" placeholder="Motivo de la consulta"></div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="input-label">Diagnóstico</label>
+                            <div class="input-box"><i class="fas fa-notes-medical"></i><textarea id="consultaDiagnostico" rows="3" placeholder="Diagnóstico"></textarea></div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="input-label">Tratamiento indicado</label>
+                            <div class="input-box"><i class="fas fa-tooth"></i><textarea id="consultaTratamiento" rows="3" placeholder="Tratamiento indicado"></textarea></div>
+                        </div>
+
+                        <div class="input-field">
+                            <label class="input-label">Observaciones</label>
+                            <div class="input-box"><i class="fas fa-comment"></i><textarea id="consultaObservaciones" rows="2" placeholder="Observaciones adicionales"></textarea></div>
+                        </div>
+
+                        <hr style="margin: 15px 0;">
+
+                        <h3><i class="fas fa-chart-simple"></i> Odontograma - Piezas tratadas</h3>
+                        <p style="font-size:0.8rem;color:#666;">Haga clic en las piezas dentales que fueron tratadas</p>
+                        ${piezasHtml}
+
+                        <div style="display:flex;gap:10px;margin-top:20px;">
+                            <button onclick="guardarConsultaConOdontograma()" class="btn-primary" style="flex:1;">
+                                <i class="fas fa-save"></i> Guardar consulta y finalizar cita
+                            </button>
+                            <button onclick="document.getElementById('modalConsultaCita').style.display='none'" class="btn-secondary" style="flex:1;background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;">Cancelar</button>
+                        </div>
+                        <div id="consultaFeedback" style="margin-top:15px;"></div>
+                    </div>
+                `;
+                modal.style.display = 'flex';
+            });
+        }
+
+        window.guardarConsultaConOdontograma = async function() {
+    const feedback = document.getElementById('consultaFeedback');
+    const citaId = document.getElementById('consultaCitaId').value;
+    const pacienteCedula = document.getElementById('consultaPacienteCedula').value;
+    const motivo = document.getElementById('consultaMotivo').value;
+    const diagnostico = document.getElementById('consultaDiagnostico').value;
+    const tratamiento = document.getElementById('consultaTratamiento').value;
+    const observaciones = document.getElementById('consultaObservaciones').value;
+
+    const selectedPiezas = [];
+    const piezasElements = document.querySelectorAll('#piezasGrid .pieza-item.selected');
+    for (const item of piezasElements) {
+        selectedPiezas.push({
+            id_pieza: parseInt(item.dataset.id),
+            codigo: item.dataset.codigo,
+            nombre: item.dataset.nombre
+        });
+    }
+
+    if (!motivo && !diagnostico && !tratamiento) {
+        if (selectedPiezas.length === 0) {
+            feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Complete al menos diagnóstico o tratamiento, o seleccione piezas tratadas</div>';
+            return;
+        }
+    }
+
+    feedback.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Guardando consulta...</div>';
+
+    try {
+        // 1. Registrar la consulta
+        const consultaResponse = await fetch('/api/consultas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                cedula_paciente: pacienteCedula,
+                motivo_consulta: motivo,
+                diagnostico: diagnostico,
+                tratamiento: tratamiento,
+                observaciones: observaciones
+            })
+        });
+
+        const consultaResult = await consultaResponse.json();
+
+        if (!consultaResult.success) {
+            feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error al guardar consulta: ' + consultaResult.mensaje + '</div>';
+            return;
+        }
+
+        const idConsulta = consultaResult.id;
+
+        // 2. Registrar tratamientos de piezas
+        for (const pieza of selectedPiezas) {
+            await fetch('/api/tratamientos-piezas', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id_consulta: idConsulta,
+                    id_pieza: pieza.id_pieza,
+                    estado_tratamiento: 'tratado',
+                    descripcion_tratamiento: `Tratamiento realizado en pieza ${pieza.codigo}`
+                })
+            });
+        }
+
+        // 3. Actualizar el estado de la cita a "completada"
+        const updateCitaResponse = await fetch('/api/citas', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id_cita: parseInt(citaId),
+                estado: 'completada'
+            })
+        });
+
+        const updateCitaResult = await updateCitaResponse.json();
+
+        if (!updateCitaResult.success) {
+            feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error al actualizar la cita: ' + updateCitaResult.mensaje + '</div>';
+            return;
+        }
+
+        feedback.innerHTML = '<div class="info-message" style="background:#d4edda; color:#155724;">Consulta registrada correctamente. Cita completada.</div>';
+
+        // Cerrar modal y recargar la búsqueda
+        setTimeout(() => {
+            document.getElementById('modalConsultaCita').style.display = 'none';
+            // Recargar la búsqueda actual
+            const searchText = document.getElementById('searchText');
+            if (searchText && searchText.value) {
+                const doSearchBtn = document.getElementById('doSearch');
+                if (doSearchBtn) {
+                    doSearchBtn.click();
+                }
+            } else {
+                // Si no hay texto de búsqueda, recargar la página o mostrar mensaje
+                showToast("Cita completada exitosamente", false);
+                location.reload();
+            }
+        }, 1500);
+
+    } catch (error) {
+        console.error('Error:', error);
+        feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error de conexión</div>';
+    }
+};
+
+        window.reagendarCita = function(idCita, fechaActual, horaActual, motivoActual, observacionesActual) {
+            let modal = document.getElementById('modalReagendarCita');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'modalReagendarCita';
+                modal.style.cssText = `display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:2000;`;
+                document.body.appendChild(modal);
+            }
+
+            modal.innerHTML = `
+                <div style="background:white;border-radius:20px;max-width:500px;width:90%;padding:30px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+                        <h2>Reagendar cita</h2>
+                        <button onclick="document.getElementById('modalReagendarCita').style.display='none'" style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button>
+                    </div>
+                    <div class="input-field"><label class="input-label">Nueva fecha *</label><div class="input-box"><i class="fas fa-calendar"></i><input type="date" id="nuevaFechaCita" value="${fechaActual}"></div></div>
+                    <div class="input-field"><label class="input-label">Nueva hora *</label><div class="input-box"><i class="fas fa-clock"></i><input type="time" id="nuevaHoraCita" value="${horaActual}"></div></div>
+                    <div class="input-field"><label class="input-label">Motivo</label><div class="input-box"><i class="fas fa-stethoscope"></i><input type="text" id="nuevoMotivo" value="${escapeHtml(motivoActual)}"></div></div>
+                    <div class="input-field"><label class="input-label">Observaciones</label><div class="input-box"><i class="fas fa-comment"></i><textarea id="nuevasObservaciones" rows="3">${escapeHtml(observacionesActual)}</textarea></div></div>
+                    <div class="input-field"><label class="input-label">Estado</label><div class="input-box"><i class="fas fa-tag"></i><select id="nuevoEstado"><option value="agendada">Agendada</option><option value="confirmada">Confirmada</option><option value="cancelada">Cancelada</option><option value="completada">Completada</option></select></div></div>
+                    <div style="display:flex;gap:10px;margin-top:20px;">
+                        <button onclick="guardarReagendarCita(${idCita})" class="btn-primary" style="flex:1;">Guardar cambios</button>
+                        <button onclick="document.getElementById('modalReagendarCita').style.display='none'" class="btn-secondary" style="flex:1;background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;">Cancelar</button>
+                    </div>
+                    <div id="reagendarFeedback" style="margin-top:15px;"></div>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        };
+
+        window.guardarReagendarCita = async function(idCita) {
+            const feedback = document.getElementById('reagendarFeedback');
+            const fecha = document.getElementById('nuevaFechaCita').value;
+            const hora = document.getElementById('nuevaHoraCita').value;
+
+            if (!fecha || !hora) {
+                feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Fecha y hora son obligatorias</div>';
+                return;
+            }
+
+            const data = {
+                id_cita: idCita,
+                fecha_cita: fecha,
+                hora_cita: hora,
+                motivo: document.getElementById('nuevoMotivo').value,
+                observaciones: document.getElementById('nuevasObservaciones').value,
+                estado: document.getElementById('nuevoEstado').value
+            };
+
+            feedback.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Guardando cambios...</div>';
+
+            try {
+                const response = await fetch('/api/citas', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    feedback.innerHTML = '<div class="info-message" style="background:#d4edda; color:#155724;">Cita reagendada correctamente</div>';
+                    setTimeout(() => {
+                        document.getElementById('modalReagendarCita').style.display = 'none';
+                        const searchBtn = document.getElementById('doSearch');
+                        if (searchBtn) searchBtn.click();
+                    }, 1500);
+                } else {
+                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error: ' + result.mensaje + '</div>';
+                }
+            } catch (error) {
+                feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error de conexion</div>';
+            }
+        };
+
+        // ==================== BUSCAR PACIENTE ====================
+        function renderBuscarPaciente() {
+            const html = `
+                <div class="input-field">
+                    <label class="input-label">Buscar por cedula o nombre</label>
+                    <div class="input-box"><i class="fas fa-search"></i><input type="text" id="searchText" placeholder="Cedula o nombre completo"></div>
+                </div>
+                <button class="btn-primary" id="doSearch"><i class="fas fa-search"></i> Buscar</button>
+                <div id="searchResults"></div>
+            `;
+            showPanel('<i class="fas fa-search"></i> Buscar paciente', html);
+
+            document.getElementById('doSearch').addEventListener('click', async () => {
+                const text = document.getElementById('searchText').value;
+                const resultsDiv = document.getElementById('searchResults');
+
+                if (!text) {
+                    resultsDiv.innerHTML = '<div class="info-message">Ingrese cedula o nombre para buscar</div>';
+                    return;
+                }
+
+                resultsDiv.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Buscando...</div>';
+
+                try {
+                    const response = await fetch('/api/pacientes/buscar?q=' + encodeURIComponent(text));
+                    const result = await response.json();
+
+                    if (result.success && result.data.length > 0) {
+                        let htmlResult = '<div class="info-message"><strong>Resultados encontrados:</strong></div>';
+
+                        for (const p of result.data) {
+                            htmlResult += `
+                                <div class="info-message" style="margin-top: 10px; text-align: left;">
+                                    <strong><i class="fas fa-user-circle"></i> ${escapeHtml(p.nombre_completo)}</strong><br>
+                                    <i class="fas fa-id-card"></i> Cedula: ${p.cedula}<br>
+                                    <i class="fas fa-phone"></i> Telefono: ${p.telefono || 'N/A'}<br>
+                                    <i class="fas fa-envelope"></i> Correo: ${p.correo || 'N/A'}<br>
+                                    <i class="fas fa-map-marker-alt"></i> Direccion: ${p.direccion || 'N/A'}
+                                </div>
+                                <div style="margin: 10px 0; text-align: center; display: flex; gap: 10px; justify-content: center;">
+                                    <button onclick="editarPaciente(${p.id})" style="background: #ffc107; color: #333; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </button>
+                                    <button onclick="eliminarPaciente(${p.id}, '${p.nombre_completo}', '${p.cedula}')" style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                    </button>
+                                </div>
+                            `;
+
+                            const citasAgendadas = p.citas_agendadas || [];
+                            if (citasAgendadas.length > 0) {
+                                htmlResult += `<div class="citas-container"><strong style="color: #27ae60;"><i class="fas fa-calendar-check"></i> Citas Agendadas (${citasAgendadas.length})</strong><div style="margin-top: 8px;">`;
+                                for (const cita of citasAgendadas) {
+                                    htmlResult += `
+                                        <div class="cita-item agendada">
+                                            <div class="cita-fecha"><i class="fas fa-calendar"></i> ${cita.fecha}</div>
+                                            <div class="cita-hora"><i class="fas fa-clock"></i> ${cita.hora}</div>
+                                            <div class="cita-motivo"><i class="fas fa-stethoscope"></i> Motivo: ${cita.motivo || 'No especificado'}</div>
+                                            <span class="cita-estado estado-${cita.estado}">${cita.estado.toUpperCase()}</span>
+                                            ${cita.observaciones ? '<div style="font-size: 0.75rem; color: #666; margin-top: 5px;"><i class="fas fa-comment"></i> ' + escapeHtml(cita.observaciones) + '</div>' : ''}
+                                            <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                                <button onclick="abrirModalConsultaCita(${cita.id}, ${p.id}, '${p.cedula}', '${escapeHtml(p.nombre_completo)}')" class="btn-success">
+                                                    <i class="fas fa-stethoscope"></i> Registrar consulta
+                                                </button>
+                                                <button onclick="reagendarCita(${cita.id}, '${cita.fecha}', '${cita.hora}', '${escapeHtml(cita.motivo)}', '${escapeHtml(cita.observaciones)}')" class="btn-warning">
+                                                    <i class="fas fa-calendar-alt"></i> Reagendar cita
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                                htmlResult += `</div></div>`;
+                            } else {
+                                htmlResult += `<div class="citas-container"><strong style="color: #e74c3c;"><i class="fas fa-calendar-times"></i> Citas Agendadas</strong><div class="info-message" style="margin-top: 5px; background: #fdf0ef;">No hay citas agendadas para este paciente</div></div>`;
+                            }
+
+                            const historialCitas = p.historial_citas || [];
+                            if (historialCitas.length > 0) {
+                                htmlResult += `<div class="citas-container" style="margin-top: 15px;"><strong style="color: #3498db;"><i class="fas fa-history"></i> Historial de Citas (${historialCitas.length})</strong><div style="margin-top: 8px;">`;
+                                for (const cita of historialCitas) {
+                                    const estadoClass = cita.estado === 'completada' ? 'completada' : 'cancelada';
+                                    htmlResult += `
+                                        <div class="cita-item historial">
+                                            <div class="cita-fecha"><i class="fas fa-calendar"></i> ${cita.fecha}</div>
+                                            <div class="cita-hora"><i class="fas fa-clock"></i> ${cita.hora}</div>
+                                            <div class="cita-motivo"><i class="fas fa-stethoscope"></i> Motivo: ${cita.motivo || 'No especificado'}</div>
+                                            <span class="cita-estado estado-${estadoClass}">${cita.estado.toUpperCase()}</span>
+                                        </div>
+                                    `;
+                                }
+                                htmlResult += `</div></div>`;
+                            }
+
+                            const totalCitas = citasAgendadas.length + historialCitas.length;
+                            htmlResult += `<div class="info-message" style="margin-top: 10px; background: #e8f5e9;"><i class="fas fa-chart-line"></i> Total de citas registradas: <strong>${totalCitas}</strong> (${citasAgendadas.length} agendadas, ${historialCitas.length} en historial)</div>`;
+                        }
+                        resultsDiv.innerHTML = htmlResult;
+                    } else {
+                        resultsDiv.innerHTML = '<div class="info-message">No se encontraron pacientes</div>';
+                    }
+                } catch (error) {
+                    resultsDiv.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error de conexion</div>';
+                }
+            });
+        }
+
+        // ==================== REGISTRAR PACIENTE ====================
+        function renderRegistrarPaciente() {
+            const html = `
+                <div class="input-field"><label class="input-label">Cedula *</label><div class="input-box"><i class="fas fa-id-card"></i><input id="cedula" placeholder="Cedula unica"></div></div>
+                <div class="input-field"><label class="input-label">Nombre completo *</label><div class="input-box"><i class="fas fa-user"></i><input id="nombre" placeholder="Nombre completo"></div></div>
+                <div class="input-field"><label class="input-label">Telefono</label><div class="input-box"><i class="fas fa-phone"></i><input id="telefono" placeholder="Telefono"></div></div>
+                <div class="input-field"><label class="input-label">Correo</label><div class="input-box"><i class="fas fa-envelope"></i><input id="correo" placeholder="correo@ejemplo.com"></div></div>
+                <div class="input-field"><label class="input-label">Direccion</label><div class="input-box"><i class="fas fa-map-marker-alt"></i><input id="direccion" placeholder="Direccion"></div></div>
+                <div class="input-field"><label class="input-label">Fecha nacimiento</label><div class="input-box"><i class="fas fa-calendar"></i><input type="date" id="fechaNac"></div></div>
+                <div class="input-field"><label class="input-label">Observaciones generales</label><div class="input-box"><i class="fas fa-comment"></i><textarea id="observaciones" placeholder="Observaciones generales"></textarea></div></div>
+                <button class="btn-primary" id="savePatient"><i class="fas fa-save"></i> Registrar</button>
+                <div id="regFeedback"></div>
+            `;
+            showPanel('<i class="fas fa-user-plus"></i> Registrar paciente', html);
+
+            document.getElementById('savePatient').addEventListener('click', async () => {
+                const feedback = document.getElementById('regFeedback');
+                const cedula = document.getElementById('cedula').value;
+                const nombre = document.getElementById('nombre').value;
+
+                if (!cedula || !nombre) {
+                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Cedula y nombre son obligatorios</div>';
+                    return;
+                }
+
+                feedback.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Guardando paciente...</div>';
+
+                try {
+                    const response = await fetch('/api/pacientes', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            cedula: cedula,
+                            nombre_completo: nombre,
+                            telefono: document.getElementById('telefono').value,
+                            correo: document.getElementById('correo').value,
+                            direccion: document.getElementById('direccion').value,
+                            fecha_nacimiento: document.getElementById('fechaNac').value,
+                            observaciones_generales: document.getElementById('observaciones').value
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        feedback.innerHTML = '<div class="info-message" style="background:#d4edda; color:#155724;">Paciente guardado correctamente</div>';
+                        document.getElementById('cedula').value = '';
+                        document.getElementById('nombre').value = '';
+                        document.getElementById('telefono').value = '';
+                        document.getElementById('correo').value = '';
+                        document.getElementById('direccion').value = '';
+                        document.getElementById('fechaNac').value = '';
+                        document.getElementById('observaciones').value = '';
+                    } else {
+                        feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error: ' + result.mensaje + '</div>';
+                    }
+                } catch (error) {
+                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error de conexion</div>';
+                }
+            });
+        }
+
+        // ==================== AGENDAR CITA ====================
+        function renderAgendarCita() {
+            const html = `
+                <div class="input-field"><label class="input-label">Cedula del paciente *</label><div class="input-box"><i class="fas fa-id-card"></i><input id="cedulaPaciente" placeholder="Cedula del paciente"></div></div>
+                <div class="input-field"><label class="input-label">Fecha cita *</label><div class="input-box"><i class="fas fa-calendar"></i><input type="date" id="fechaCita"></div></div>
+                <div class="input-field"><label class="input-label">Hora cita *</label><div class="input-box"><i class="fas fa-clock"></i><input type="time" id="horaCita"></div></div>
+                <div class="input-field"><label class="input-label">Motivo</label><div class="input-box"><i class="fas fa-stethoscope"></i><input id="motivo" placeholder="Motivo de la cita"></div></div>
+                <div class="input-field"><label class="input-label">Observaciones</label><div class="input-box"><i class="fas fa-comment"></i><textarea id="observacionesCita" placeholder="Observaciones"></textarea></div></div>
+                <button class="btn-primary" id="saveCita"><i class="fas fa-save"></i> Agendar cita</button>
+                <div id="citaFeedback"></div>
+            `;
+            showPanel('<i class="fas fa-calendar-plus"></i> Agendar cita', html);
+
+            document.getElementById('saveCita').addEventListener('click', async () => {
+                const feedback = document.getElementById('citaFeedback');
+                const cedula = document.getElementById('cedulaPaciente').value;
+                const fecha = document.getElementById('fechaCita').value;
+                const hora = document.getElementById('horaCita').value;
+
+                if (!cedula || !fecha || !hora) {
+                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Cedula, fecha y hora son obligatorios</div>';
+                    return;
+                }
+
+                feedback.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Agendando cita...</div>';
+
+                try {
+                    const response = await fetch('/api/citas', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            cedula_paciente: cedula,
+                            fecha_cita: fecha,
+                            hora_cita: hora,
+                            motivo: document.getElementById('motivo').value,
+                            observaciones: document.getElementById('observacionesCita').value,
+                            estado: 'agendada'
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        feedback.innerHTML = '<div class="info-message" style="background:#d4edda; color:#155724;">Cita agendada correctamente</div>';
+                        document.getElementById('cedulaPaciente').value = '';
+                        document.getElementById('fechaCita').value = '';
+                        document.getElementById('horaCita').value = '';
+                        document.getElementById('motivo').value = '';
+                        document.getElementById('observacionesCita').value = '';
+                    } else if (result.existe) {
+                        const reemplazar = confirm(result.mensaje + '\n\n¿Desea reemplazar la cita existente por esta nueva?');
+                        if (reemplazar) {
+                            const deleteResponse = await fetch(`/api/citas/${result.cita_existente.id}`, { method: 'DELETE' });
+                            if (deleteResponse.ok) {
+                                const retryResponse = await fetch('/api/citas', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        cedula_paciente: cedula,
+                                        fecha_cita: fecha,
+                                        hora_cita: hora,
+                                        motivo: document.getElementById('motivo').value,
+                                        observaciones: document.getElementById('observacionesCita').value,
+                                        estado: 'agendada',
+                                        force: true
+                                    })
+                                });
+                                const retryResult = await retryResponse.json();
+                                if (retryResult.success) {
+                                    feedback.innerHTML = '<div class="info-message" style="background:#d4edda; color:#155724;">Cita reemplazada correctamente</div>';
+                                    document.getElementById('cedulaPaciente').value = '';
+                                    document.getElementById('fechaCita').value = '';
+                                    document.getElementById('horaCita').value = '';
+                                    document.getElementById('motivo').value = '';
+                                    document.getElementById('observacionesCita').value = '';
+                                } else {
+                                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error: ' + retryResult.mensaje + '</div>';
+                                }
+                            } else {
+                                feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error al eliminar la cita existente</div>';
+                            }
+                        } else {
+                            feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Cita no agendada</div>';
+                        }
+                    } else {
+                        feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error: ' + result.mensaje + '</div>';
+                    }
+                } catch (error) {
+                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error de conexion</div>';
+                }
+            });
+        }
+
+        // ==================== CITAS DEL DIA ====================
+        function renderCitasDia() {
+            const html = `
+                <div class="input-field"><label class="input-label">Fecha</label><div class="input-box"><i class="fas fa-calendar"></i><input type="date" id="fechaCitas"></div></div>
+                <button class="btn-primary" id="verCitas"><i class="fas fa-search"></i> Ver citas</button>
+                <div id="citasResult"></div>
+            `;
+            showPanel('<i class="fas fa-calendar-day"></i> Citas del dia', html);
+
+            document.getElementById('verCitas').addEventListener('click', async () => {
+                const fecha = document.getElementById('fechaCitas').value;
+                const resultsDiv = document.getElementById('citasResult');
+
+                if (!fecha) {
+                    resultsDiv.innerHTML = '<div class="info-message">Seleccione una fecha</div>';
+                    return;
+                }
+
+                resultsDiv.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>';
+
+                try {
+                    const response = await fetch('/api/citas?fecha=' + fecha);
+                    const result = await response.json();
+
+                    if (result.success && result.data.length > 0) {
+                        let htmlCitas = '<div class="info-message"><strong>Citas del dia:</strong></div>';
+                        for (const c of result.data) {
+                            htmlCitas += `
+                                <div class="info-message" style="margin-top: 10px; text-align: left;">
+                                    <strong>${c.hora_cita}</strong> - ${c.paciente_nombre}<br>
+                                    Motivo: ${c.motivo || 'N/A'}<br>
+                                    Estado: ${c.estado}<br>
+                                    <div style="margin-top: 10px;">
+                                        <button onclick="reagendarCita(${c.id}, '${c.fecha}', '${c.hora_cita}', '${escapeHtml(c.motivo)}', '${escapeHtml(c.observaciones)}')" class="btn-warning">
+                                            <i class="fas fa-calendar-alt"></i> Reagendar cita
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        resultsDiv.innerHTML = htmlCitas;
+                    } else {
+                        resultsDiv.innerHTML = '<div class="info-message">No hay citas para esta fecha</div>';
+                    }
+                } catch (error) {
+                    resultsDiv.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error de conexion</div>';
+                }
+            });
+        }
+
+        // ==================== HISTORIAL CONSULTAS ====================
+        function renderHistorialConsultas() {
+            const html = `
+                <div class="input-field"><label class="input-label">Cedula del paciente</label><div class="input-box"><i class="fas fa-id-card"></i><input id="cedulaHist" placeholder="Cedula del paciente"></div></div>
+                <button class="btn-primary" id="verHistorial"><i class="fas fa-search"></i> Ver historial</button>
+                <div id="historialResult"></div>
+            `;
+            showPanel('<i class="fas fa-notes-medical"></i> Historial clinico', html);
+
+            document.getElementById('verHistorial').addEventListener('click', async () => {
+                const cedula = document.getElementById('cedulaHist').value;
+                const resultsDiv = document.getElementById('historialResult');
+
+                if (!cedula) {
+                    resultsDiv.innerHTML = '<div class="info-message">Ingrese la cedula del paciente</div>';
+                    return;
+                }
+
+                resultsDiv.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>';
+
+                try {
+                    const response = await fetch('/api/consultas/historial?cedula=' + cedula);
+                    const result = await response.json();
+
+                    if (result.success && result.data.length > 0) {
+                        let htmlHist = '<div class="info-message"><strong>Historial de consultas:</strong></div>';
+                        for (const c of result.data) {
+                            htmlHist += `<div class="info-message" style="margin-top: 10px; text-align: left;">
+                                <strong>Fecha:</strong> ${c.fecha_consulta}<br>
+                                <strong>Motivo:</strong> ${c.motivo_consulta || 'N/A'}<br>
+                                <strong>Diagnostico:</strong> ${c.diagnostico || 'N/A'}<br>
+                                <strong>Tratamiento:</strong> ${c.tratamiento || 'N/A'}
+                                <hr>
+                            </div>`;
+                        }
+                        resultsDiv.innerHTML = htmlHist;
+                    } else {
+                        resultsDiv.innerHTML = '<div class="info-message">No hay consultas para este paciente</div>';
+                    }
+                } catch (error) {
+                    resultsDiv.innerHTML = '<div class="info-message" style="background:#ffe6e6; color:#bc4742;">Error de conexion</div>';
+                }
+            });
+        }
+
+        // ==================== GESTION USUARIOS ====================
+        function renderGestionUsuarios() {
+            const html = `
+                <div class="info-message"><strong>Gestion de usuarios</strong><br>Usuarios registrados en el sistema</div>
+                <button class="btn-primary" id="listarUsuarios"><i class="fas fa-users"></i> Listar usuarios</button>
+                <div id="userResult"></div>
+                <hr>
+                <h3>Crear nuevo usuario</h3>
+                <div class="input-field"><label class="input-label">Nombre usuario *</label><div class="input-box"><i class="fas fa-user"></i><input id="newUsername" placeholder="Nombre de usuario"></div></div>
+                <div class="input-field"><label class="input-label">Contrasena *</label><div class="input-box"><i class="fas fa-lock"></i><input type="password" id="newPassword" placeholder="Contrasena"></div></div>
+                <div class="input-field"><label class="input-label">Nombre completo *</label><div class="input-box"><i class="fas fa-id-card"></i><input id="newFullName" placeholder="Nombre completo"></div></div>
+                <div class="input-field"><label class="input-label">Rol</label><div class="input-box"><i class="fas fa-tag"></i><select id="newRol"><option value="usuario">Usuario</option><option value="admin">Administrador</option></select></div></div>
+                <button class="btn-primary" id="createUser"><i class="fas fa-plus"></i> Crear usuario</button>
+                <div id="createUserFeedback"></div>
+            `;
+            showPanel('<i class="fas fa-users"></i> Gestion de usuarios', html);
+
+            document.getElementById('listarUsuarios').addEventListener('click', async () => {
+                const resultDiv = document.getElementById('userResult');
+                resultDiv.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>';
+
+                try {
+                    const response = await fetch('/api/usuarios');
+                    const result = await response.json();
+
+                    if (result.success && result.data.length > 0) {
+                        let htmlUsers = '<div class="info-message"><strong>Usuarios registrados:</strong></div>';
+                        for (const u of result.data) {
+                            htmlUsers += `<div class="info-message" style="margin-top: 5px;">${u.username} - ${u.nombre_completo} - ${u.rol}</div>`;
+                        }
+                        resultDiv.innerHTML = htmlUsers;
+                    } else {
+                        resultDiv.innerHTML = '<div class="info-message">No hay usuarios registrados</div>';
+                    }
+                } catch (error) {
+                    resultDiv.innerHTML = '<div class="info-message" style="background:#ffe6e6;">Error de conexion</div>';
+                }
+            });
+
+            document.getElementById('createUser').addEventListener('click', async () => {
+                const feedback = document.getElementById('createUserFeedback');
+                const username = document.getElementById('newUsername').value;
+                const password = document.getElementById('newPassword').value;
+                const fullname = document.getElementById('newFullName').value;
+
+                if (!username || !password || !fullname) {
+                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6;">Todos los campos son obligatorios</div>';
+                    return;
+                }
+
+                feedback.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Creando usuario...</div>';
+
+                try {
+                    const response = await fetch('/api/usuarios', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            username: username,
+                            password: password,
+                            nombre_completo: fullname,
+                            rol: document.getElementById('newRol').value
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        feedback.innerHTML = '<div class="info-message" style="background:#d4edda;">Usuario creado correctamente</div>';
+                        document.getElementById('newUsername').value = '';
+                        document.getElementById('newPassword').value = '';
+                        document.getElementById('newFullName').value = '';
+                    } else {
+                        feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6;">Error: ' + result.mensaje + '</div>';
+                    }
+                } catch (error) {
+                    feedback.innerHTML = '<div class="info-message" style="background:#ffe6e6;">Error de conexion</div>';
+                }
+            });
+        }
+
+        // ==================== BITACORA ====================
+        function renderBitacora() {
+            const html = `
+                <button class="btn-primary" id="verBitacora"><i class="fas fa-history"></i> Ver bitacora</button>
+                <div id="bitacoraResult"></div>
+            `;
+            showPanel('<i class="fas fa-history"></i> Bitacora de actividades', html);
+
+            document.getElementById('verBitacora').addEventListener('click', async () => {
+                const resultDiv = document.getElementById('bitacoraResult');
+                resultDiv.innerHTML = '<div class="info-message"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>';
+
+                try {
+                    const response = await fetch('/api/bitacora');
+                    const result = await response.json();
+
+                    if (result.success && result.data.length > 0) {
+                        let htmlBit = '<div class="info-message"><strong>Ultimas actividades:</strong></div>';
+                        for (const b of result.data) {
+                            htmlBit += `<div class="info-message" style="margin-top: 5px;">${b.fecha_hora} - ${b.accion} - ${b.descripcion}</div>`;
+                        }
+                        resultDiv.innerHTML = htmlBit;
+                    } else {
+                        resultDiv.innerHTML = '<div class="info-message">No hay registros en la bitacora</div>';
+                    }
+                } catch (error) {
+                    resultDiv.innerHTML = '<div class="info-message" style="background:#ffe6e6;">Error de conexion</div>';
+                }
+            });
+        }
+
+        // ==================== FUNCIONES GLOBALES ====================
+        // ==================== EDITAR PACIENTE COMPLETO ====================
+window.editarPaciente = async function(id) {
+    try {
+        // Obtener datos actuales del paciente
+        const response = await fetch(`/api/pacientes/${id}`);
+        const result = await response.json();
+
+        if (result.success) {
+            const p = result.data;
+
+            // Crear modal de edición
+            let modal = document.getElementById('modalEditarPaciente');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'modalEditarPaciente';
+                modal.style.cssText = `display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:2000;overflow-y:auto;`;
+                document.body.appendChild(modal);
+            }
+
+            modal.innerHTML = `
+                <div style="background:white;border-radius:20px;max-width:550px;width:90%;padding:30px;max-height:90vh;overflow-y:auto;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+                        <h2><i class="fas fa-user-edit"></i> Editar paciente</h2>
+                        <button onclick="document.getElementById('modalEditarPaciente').style.display='none'" style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button>
+                    </div>
+                    <input type="hidden" id="editPacienteId" value="${p.id}">
+
+                    <div class="input-field">
+                        <label class="input-label">Cédula *</label>
+                        <div class="input-box"><i class="fas fa-id-card"></i><input type="text" id="editCedula" value="${escapeHtml(p.cedula)}" readonly style="background:#e9ecef;"></div>
+                    </div>
+
+                    <div class="input-field">
+                        <label class="input-label">Nombre completo *</label>
+                        <div class="input-box"><i class="fas fa-user"></i><input type="text" id="editNombre" value="${escapeHtml(p.nombre_completo)}"></div>
+                    </div>
+
+                    <div class="input-field">
+                        <label class="input-label">Teléfono</label>
+                        <div class="input-box"><i class="fas fa-phone"></i><input type="text" id="editTelefono" value="${escapeHtml(p.telefono || '')}"></div>
+                    </div>
+
+                    <div class="input-field">
+                        <label class="input-label">Correo electrónico</label>
+                        <div class="input-box"><i class="fas fa-envelope"></i><input type="email" id="editCorreo" value="${escapeHtml(p.correo || '')}"></div>
+                    </div>
+
+                    <div class="input-field">
+                        <label class="input-label">Dirección</label>
+                        <div class="input-box"><i class="fas fa-map-marker-alt"></i><input type="text" id="editDireccion" value="${escapeHtml(p.direccion || '')}"></div>
+                    </div>
+
+                    <div class="input-field">
+                        <label class="input-label">Fecha de nacimiento</label>
+                        <div class="input-box"><i class="fas fa-calendar"></i><input type="date" id="editFechaNac" value="${p.fecha_nacimiento || ''}"></div>
+                    </div>
+
+                    <div class="input-field">
+                        <label class="input-label">Observaciones generales</label>
+                        <div class="input-box"><i class="fas fa-comment"></i><textarea id="editObservaciones" rows="3">${escapeHtml(p.observaciones_generales || '')}</textarea></div>
+                    </div>
+
+                    <div style="display:flex;gap:10px;margin-top:20px;">
+                        <button onclick="guardarEdicionPaciente()" class="btn-primary" style="flex:1;">
+                            <i class="fas fa-save"></i> Guardar cambios
+                        </button>
+                        <button onclick="document.getElementById('modalEditarPaciente').style.display='none'" style="flex:1;background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;">
+                            Cancelar
+                        </button>
+                    </div>
+                    <div id="editFeedback" style="margin-top:15px;"></div>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        } else {
+            showToast("Error al cargar datos del paciente", true);
+        }
+    } catch (error) {
+        showToast("Error de conexión", true);
+    }
+};
+
+window.guardarEdicionPaciente = async function() {
+    const id = document.getElementById('editPacienteId').value;
+    const feedback = document.getElementById('editFeedback');
+    const nombre = document.getElementById('editNombre').value;
+    const cedula = document.getElementById('editCedula').value;
+
+    if (!nombre) {
+        feedback.innerHTML = '<div style="color:#bc4742;padding:10px;">El nombre completo es obligatorio</div>';
+        return;
+    }
+
+    const data = {
+        cedula: cedula,
+        nombre_completo: nombre,
+        telefono: document.getElementById('editTelefono').value,
+        correo: document.getElementById('editCorreo').value,
+        direccion: document.getElementById('editDireccion').value,
+        fecha_nacimiento: document.getElementById('editFechaNac').value,
+        observaciones_generales: document.getElementById('editObservaciones').value
+    };
+
+    feedback.innerHTML = '<div style="padding:10px;"><i class="fas fa-spinner fa-spin"></i> Guardando cambios...</div>';
+
+    try {
+        const response = await fetch(`/api/pacientes/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            feedback.innerHTML = '<div style="background:#d4edda;color:#155724;padding:10px;border-radius:8px;">Paciente actualizado correctamente</div>';
+            setTimeout(() => {
+                document.getElementById('modalEditarPaciente').style.display = 'none';
+                // Refrescar la búsqueda
+                const searchBtn = document.getElementById('doSearch');
+                if (searchBtn) searchBtn.click();
+                showToast("Paciente actualizado exitosamente", false);
+            }, 1500);
+        } else {
+            feedback.innerHTML = `<div style="background:#ffe6e6;color:#bc4742;padding:10px;border-radius:8px;">Error: ${result.mensaje}</div>`;
+        }
+    } catch (error) {
+        feedback.innerHTML = '<div style="background:#ffe6e6;color:#bc4742;padding:10px;border-radius:8px;">Error de conexión</div>';
+    }
+};
+
+// ==================== ELIMINAR PACIENTE ====================
+window.eliminarPaciente = async function(id, nombre, cedula) {
+    // Crear modal de confirmación
+    let modal = document.getElementById('modalConfirmarEliminar');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'modalConfirmarEliminar';
+        modal.style.cssText = `display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:2000;`;
+        document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `
+        <div style="background:white;border-radius:20px;max-width:400px;width:90%;padding:30px;">
+            <div style="text-align:center;margin-bottom:20px;">
+                <i class="fas fa-exclamation-triangle" style="font-size:48px;color:#dc3545;"></i>
+                <h2>Confirmar eliminación</h2>
+            </div>
+            <p style="text-align:center;margin-bottom:20px;">
+                ¿Está seguro que desea eliminar a <strong>${escapeHtml(nombre)}</strong>?<br>
+                <small style="color:#dc3545;">Esta acción eliminará todas sus citas y consultas registradas.</small>
+            </p>
+            <div style="display:flex;gap:10px;">
+                <button onclick="confirmarEliminarPaciente(${id}, '${escapeHtml(nombre)}')" style="flex:1;background:#dc3545;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;">
+                    <i class="fas fa-trash"></i> Sí, eliminar
+                </button>
+                <button onclick="document.getElementById('modalConfirmarEliminar').style.display='none'" style="flex:1;background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    `;
+    modal.style.display = 'flex';
+};
+
+window.confirmarEliminarPaciente = async function(id, nombre) {
+    try {
+        const response = await fetch(`/api/pacientes/${id}`, { method: 'DELETE' });
+        const result = await response.json();
+
+        if (result.success) {
+            document.getElementById('modalConfirmarEliminar').style.display = 'none';
+            showToast(`Paciente ${nombre} eliminado correctamente`, false);
+            // Refrescar la búsqueda
+            const searchBtn = document.getElementById('doSearch');
+            if (searchBtn) searchBtn.click();
+        } else {
+            showToast("Error al eliminar paciente", true);
+        }
+    } catch (error) {
+        showToast("Error de conexión", true);
+    }
+};
+        // ==================== MENU ====================
+        const menuItems = document.querySelectorAll('.menu-item');
+        const actions = {
+            buscar: renderBuscarPaciente,
+            registrar: renderRegistrarPaciente,
+            agendar: renderAgendarCita,
+            citasdia: renderCitasDia,
+            historial: renderHistorialConsultas,
+            usuarios: renderGestionUsuarios,
+            bitacora: renderBitacora
+        };
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                const action = item.dataset.action;
+                if (actions[action]) actions[action]();
+            });
+        });
+
+        renderBuscarPaciente();
+    </script>
+</body>
+</html>

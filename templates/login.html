@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Inicio de Sesión | Consultorio Dental Cristy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            width: 100%;
+            background-image: url("/static/imagenes/fondo.png");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.35);
+            z-index: 0;
+        }
+
+        .login-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 480px;
+            margin: 1.5rem;
+            animation: fadeSlideUp 0.55s ease-out;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 2.2rem 2rem 2rem;
+            box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .login-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 50px -12px rgba(0, 0, 0, 0.35);
+        }
+
+        .brand-icon {
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .logo-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .logo-img {
+            max-width: 120px;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            padding: 8px;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
+            transition: transform 0.2s;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+
+        .doctor-name {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            background: linear-gradient(115deg, #155f7c, #228b6e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .specialty {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2c7da0;
+            background: rgba(44, 125, 160, 0.12);
+            display: inline-block;
+            padding: 0.2rem 1.3rem;
+            border-radius: 40px;
+            letter-spacing: 0.8px;
+            margin-top: 6px;
+        }
+
+        .slogan-dental {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4186a3;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .access-heading {
+            text-align: center;
+            margin: 1.5rem 0 1.8rem 0;
+        }
+
+        .access-heading h2 {
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: #1e3b44;
+            letter-spacing: -0.2px;
+            display: inline-block;
+            border-bottom: 3px solid #2c9c7c;
+            padding-bottom: 6px;
+        }
+
+        .input-field {
+            margin-bottom: 1.6rem;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            color: #235f77;
+            margin-bottom: 0.4rem;
+            margin-left: 0.3rem;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            background: #f4fafd;
+            border-radius: 60px;
+            border: 1px solid #cde3ec;
+            transition: all 0.2s;
+            padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+        }
+
+        .input-box i {
+            color: #2c7da0;
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 0.9rem 0.9rem 0.9rem 0.5rem;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 500;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            color: #1c3b46;
+        }
+
+        .input-box input::placeholder {
+            color: #aacadb;
+            font-weight: 400;
+        }
+
+        .input-box:focus-within {
+            border-color: #2c9c7c;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(44, 156, 124, 0.2);
+        }
+
+        .btn-login {
+            background: linear-gradient(100deg, #236b88, #1c8464);
+            width: 100%;
+            border: none;
+            border-radius: 60px;
+            padding: 0.95rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 6px 14px rgba(27, 91, 79, 0.3);
+        }
+
+        .btn-login i {
+            font-size: 1.2rem;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(100deg, #1d5a73, #146e52);
+            transform: scale(1.01);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+
+        .feedback-area {
+            text-align: center;
+            margin-top: 1.2rem;
+            min-height: 52px;
+        }
+
+        .demo-toast {
+            background: #e9f4f0;
+            padding: 8px 16px;
+            border-radius: 50px;
+            display: inline-block;
+            color: #136b53;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .demo-toast i {
+            margin-right: 6px;
+        }
+
+        .demo-toast.error {
+            background: #ffeae6;
+            color: #bc4742;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .login-card {
+                padding: 1.6rem;
+            }
+            .doctor-name {
+                font-size: 1.6rem;
+            }
+            .access-heading h2 {
+                font-size: 1.4rem;
+            }
+            .logo-img {
+                max-width: 90px;
+                max-height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="brand-icon">
+                <div class="logo-image-container">
+                    <img src="/static/imagenes/logo.png"
+                         alt="Logo Consultorio Dental Cristy"
+                         class="logo-img"
+                         onerror="this.src='https://via.placeholder.com/120?text=Logo'">
+                </div>
+                <div class="doctor-name">DOCTORA CRISTY</div>
+                <div class="specialty">ODONTOLOGÍA INTEGRAL</div>
+                <div class="slogan-dental">
+                    <i class="fas fa-smile-wink"></i>
+                    <span>Sonrisas saludables · Atención personalizada</span>
+                </div>
+            </div>
+
+            <div class="access-heading">
+                <h2>INICIAR SESIÓN</h2>
+            </div>
+
+            <form id="loginForm" action="javascript:void(0);" method="post">
+                <div class="input-field">
+                    <label class="input-label" for="username">USUARIO</label>
+                    <div class="input-box">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" autocomplete="username">
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <label class="input-label" for="password">CONTRASEÑA</label>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" autocomplete="current-password">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginButton">
+                    <i class="fas fa-arrow-right-to-bracket"></i> INGRESAR
+                </button>
+
+                <div id="loginFeedback" class="feedback-area"></div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { AuthService } from '/static/js/auth.js';
+
+        const form = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginButton');
+        const feedbackDiv = document.getElementById('loginFeedback');
+
+        function setMessage(message, isError = false) {
+            feedbackDiv.innerHTML = `
+                <div class="demo-toast ${isError ? 'error' : ''}">
+                    <i class="fas ${isError ? 'fa-triangle-exclamation' : 'fa-circle-check'}"></i>
+                    ${message}
+                </div>
+            `;
+            setTimeout(() => {
+                if (feedbackDiv.innerHTML.includes(message)) {
+                    feedbackDiv.innerHTML = '';
+                }
+            }, 3200);
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const user = usernameInput.value.trim();
+            const pass = passwordInput.value.trim();
+
+            if (user === "") {
+                setMessage("Por favor, ingresa tu nombre de usuario.", true);
+                usernameInput.focus();
+                return;
+            }
+
+            if (pass === "") {
+                setMessage("Escribe tu contraseña para continuar.", true);
+                passwordInput.focus();
+                return;
+            }
+
+            const originalBtnHTML = loginBtn.innerHTML;
+            loginBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Validando...';
+            loginBtn.disabled = true;
+
+            const result = await AuthService.login(user, pass);
+
+            if (result.success) {
+                setMessage(`Bienvenido/a ${user}! Redirigiendo al panel principal...`, false);
+                setTimeout(() => {
+                    window.location.href = '/main-form';
+                }, 800);
+            } else {
+                setMessage(result.message || "Credenciales incorrectas", true);
+                loginBtn.innerHTML = originalBtnHTML;
+                loginBtn.disabled = false;
+            }
+        }
+
+        form.addEventListener('submit', handleLogin);
+    </script>
+</body>
+</html>
